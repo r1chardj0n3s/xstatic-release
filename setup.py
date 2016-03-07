@@ -17,7 +17,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'main=xstatic_release:main',
+            'xstatic-release=xstatic_release:main',
         ],
     }
 )

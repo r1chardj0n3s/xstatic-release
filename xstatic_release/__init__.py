@@ -73,7 +73,7 @@ Increment package BUILD in xstatic/pkg/{}/__init__.py'''.format(
         f.write(CFG_TEMPLATE.format(xs))
 
     with open('setup.py', 'w') as f:
-        f.write(PY_TEMPLATE.format(name, xs.PACKAGE_NAME))
+        f.write(PY_TEMPLATE.format(xs.PACKAGE_NAME))
 
     with open('MANIFEST.in', 'w') as f:
         f.write(MANIFEST_TEMPLATE)
