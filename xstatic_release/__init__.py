@@ -7,7 +7,7 @@ import sys
 
 # Increase this version when features are changed so that xstatic
 # packagers track updates.
-__version__ = '1.1.0'
+__version__ = '1.1.1'
 
 CFG_TEMPLATE = '''[metadata]
 name = {0.PACKAGE_NAME}
