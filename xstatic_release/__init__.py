@@ -42,7 +42,7 @@ setup(
     summary="""{0.DESCRIPTION}""",
     description=long_description,
     maintainer="{0.MAINTAINER}",
-    maintainer-email='{0.MAINTAINER_EMAIL}',
+    maintainer_email='{0.MAINTAINER_EMAIL}',
     use_scm_version=True,
     setup_requires=['setuptools_scm', 'wheel'],
     packages=find_packages()
