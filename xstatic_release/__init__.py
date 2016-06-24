@@ -32,8 +32,17 @@ universal = True
 '''
 
 PY_TEMPLATE = '''from setuptools import setup, find_packages
+
+# The README.txt file should be written in reST so that PyPI can use
+# it to generate your project's PyPI page.
+long_description = open('README.txt').read()
+
 setup(
-    name='{}',
+    name='{0.PACKAGE_NAME}',
+    summary="""{0.DESCRIPTION}""",
+    description=long_description,
+    maintainer="{0.MAINTAINER}",
+    maintainer-email='{0.MAINTAINER_EMAIL}',
     use_scm_version=True,
     setup_requires=['setuptools_scm', 'wheel'],
     packages=find_packages()
@@ -73,7 +82,7 @@ Increment package BUILD in xstatic/pkg/{}/__init__.py'''.format(
         f.write(CFG_TEMPLATE.format(xs))
 
     with open('setup.py', 'w') as f:
-        f.write(PY_TEMPLATE.format(xs.PACKAGE_NAME))
+        f.write(PY_TEMPLATE.format(xs))
 
     with open('MANIFEST.in', 'w') as f:
         f.write(MANIFEST_TEMPLATE)
