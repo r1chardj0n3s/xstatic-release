@@ -5,9 +5,13 @@ import os
 import subprocess
 import sys
 
+# ensure the xstatic package in the user's current working
+# directory is importable
+sys.path.insert(0, os.getcwd())
+
 # Increase this version when features are changed so that xstatic
 # packagers track updates.
-__version__ = '1.1.1'
+__version__ = '1.1.2'
 
 CFG_TEMPLATE = '''[metadata]
 name = {0.PACKAGE_NAME}
@@ -45,7 +49,8 @@ setup(
     maintainer_email='{0.MAINTAINER_EMAIL}',
     use_scm_version=True,
     setup_requires=['setuptools_scm', 'wheel'],
-    packages=find_packages()
+    packages=find_packages(),
+    include_package_data=True
 )
 '''
 
