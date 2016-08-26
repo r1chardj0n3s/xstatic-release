@@ -16,3 +16,10 @@ For every release:
 5. After the patch merges, git tag it with *PACKAGE_VERSION* and push that tag
    as per https://wiki.openstack.org/wiki/StableBranchRelease#Tag
 6. Release package with "python setup.py sdist", "python setup.py bdist_wheel"
+
+
+Releases
+--------
+
+- 1.1.3 Correct naming of summary -> description fields
+- 1.1.2 First usable public release

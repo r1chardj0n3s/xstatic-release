@@ -11,7 +11,7 @@ sys.path.insert(0, os.getcwd())
 
 # Increase this version when features are changed so that xstatic
 # packagers track updates.
-__version__ = '1.1.2'
+__version__ = '1.1.3'
 
 CFG_TEMPLATE = '''[metadata]
 name = {0.PACKAGE_NAME}
