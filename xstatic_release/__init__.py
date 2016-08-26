@@ -15,7 +15,7 @@ __version__ = '1.1.2'
 
 CFG_TEMPLATE = '''[metadata]
 name = {0.PACKAGE_NAME}
-summary = {0.DESCRIPTION}
+description = {0.DESCRIPTION}
 description-file = README.rst
 maintainer = {0.MAINTAINER}
 maintainer-email = {0.MAINTAINER_EMAIL}
@@ -43,8 +43,8 @@ long_description = open('README.txt').read()
 
 setup(
     name='{0.PACKAGE_NAME}',
-    summary="""{0.DESCRIPTION}""",
-    description=long_description,
+    description="""{0.DESCRIPTION}""",
+    long_description=long_description,
     maintainer="{0.MAINTAINER}",
     maintainer_email='{0.MAINTAINER_EMAIL}',
     use_scm_version=True,
