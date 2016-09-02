@@ -1,5 +1,5 @@
 """
-OpenStack xstatic package release helper
+OpenStack XStatic package release helper
 """
 
 import importlib
@@ -7,6 +7,8 @@ import os
 import subprocess
 import sys
 
+
+PKG_DIR = 'xstatic/pkg'
 
 CFG_TEMPLATE = '''[metadata]
 name = {0.PACKAGE_NAME}
@@ -58,31 +60,47 @@ global-exclude *.rej
 '''
 
 
-def main():
-    xs = name = None
-    for name in os.listdir('xstatic/pkg'):
-        if os.path.isdir('xstatic/pkg/' + name):
-            if xs is not None:
-                sys.exit('More than one xstatic.pkg package found.')
-            xs = importlib.import_module('xstatic.pkg.' + name)
+class XStaticError(Exception):
+    pass
 
-    if xs is None:
-        sys.exit('No xstatic.pkg package found.')
 
-    releases = set(
+def import_xstatic():
+    names = [name for name in os.listdir(PKG_DIR)
+             if os.path.isdir(os.path.join(PKG_DIR, name))]
+    if not names:
+        raise XStaticError("no XStatic packages found")
+    elif len(names) > 1:
+        raise XStaticError("more than one XStatic package found")
+    xs = importlib.import_module('xstatic.pkg.{}'.format(names[0]))
+    return xs
+
+
+def get_git_tags():
+    return set(
         subprocess.check_output('git tag -l', shell=True).splitlines()
     )
-    if xs.PACKAGE_VERSION in releases:
-        sys.exit('''\
-FAIL: Package release {} already tagged (so is assumed released)
-Increment package BUILD in xstatic/pkg/{}/__init__.py'''.format(
-            xs.PACKAGE_VERSION, name))
 
-    with open('setup.cfg', 'w') as f:
-        f.write(CFG_TEMPLATE.format(xs))
 
-    with open('setup.py', 'w') as f:
-        f.write(PY_TEMPLATE.format(xs))
+def version_is_tagged(version):
+    releases = get_git_tags()
+    return version in releases
 
-    with open('MANIFEST.in', 'w') as f:
-        f.write(MANIFEST_TEMPLATE)
+
+def write_files(xs):
+    for filename, template in (
+        ('setup.cfg', CFG_TEMPLATE),
+        ('setup.py', PY_TEMPLATE),
+        ('MANIFEST.in', MANIFEST_TEMPLATE),
+    ):
+        with open(filename, 'w') as f:
+            f.write(template.format(xs))
+
+
+def main():
+    xs = import_xstatic()
+    if version_is_tagged(xs.PACKAGE_VERSION):
+        sys.exit(
+"""FAIL: Package release {0} already tagged (so is assumed released)
+Increment package BUILD in {1}/{2}/__init__.py""".format(
+            xs.PACKAGE_VERSION, PKG_DIR, xs.PACKAGE_NAME))
+    write_files(xs)
