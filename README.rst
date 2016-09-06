@@ -21,6 +21,7 @@ For every release:
 Releases
 --------
 
+- 1.2.1 Fix incorrect use of PACKAGE_NAME vs NAME
 - 1.2.0 Remove use of setuptools_scm and revert to more typical xstatic setup.py
 - 1.1.3 Correct naming of summary -> description fields
 - 1.1.2 First usable public release

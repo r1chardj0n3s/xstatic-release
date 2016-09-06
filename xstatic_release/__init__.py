@@ -11,7 +11,7 @@ sys.path.insert(0, os.getcwd())
 
 # Increase this version when features are changed so that xstatic
 # packagers track updates.
-__version__ = '1.2.0'
+__version__ = '1.2.1'
 
 CFG_TEMPLATE = '''[metadata]
 name = {0.PACKAGE_NAME}
@@ -36,7 +36,7 @@ universal = True
 '''
 
 PY_TEMPLATE = '''from setuptools import setup, find_packages
-from xstatic.pkg import {0.PACKAGE_NAME} as xs
+from xstatic.pkg import {0.NAME} as xs
 
 # The README.txt file should be written in reST so that PyPI can use
 # it to generate your project's PyPI page.
