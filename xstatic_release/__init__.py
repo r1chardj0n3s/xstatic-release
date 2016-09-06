@@ -11,7 +11,7 @@ sys.path.insert(0, os.getcwd())
 
 # Increase this version when features are changed so that xstatic
 # packagers track updates.
-__version__ = '1.1.3'
+__version__ = '1.2.0'
 
 CFG_TEMPLATE = '''[metadata]
 name = {0.PACKAGE_NAME}
@@ -55,7 +55,7 @@ setup(
     url=xs.HOMEPAGE,
     platforms=xs.PLATFORMS,
     packages=find_packages(),
-    namespace_packages=['xstatic', 'xstatic.pkg', ],
+    namespace_packages=['xstatic', 'xstatic.pkg'],
     include_package_data=True,
     zip_safe=False,
     install_requires=[],
